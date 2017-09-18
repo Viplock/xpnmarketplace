@@ -11,9 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>XPN Market Store</title>
+    <title>XPN Marketplace</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="~/Content/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- DataTables Responsive CSS -->
+    <link href="~/Content/dataTables.responsive.css" rel="stylesheet" />
     <!-- MetisMenu CSS -->
     <link href="~/Content/metisMenu.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -34,8 +38,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../Dashboard/Index">XPN Market Store</a>
-            </div>                            
+                <a class="navbar-brand" href="../Dashboard/Index">XPN Marketplace</a>
+            </div>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -153,68 +157,238 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">10</div>
-                                    <div>Create Offer!</div>
+                    <a href="@Url.Action("CreateOffer", "Dashboard")">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">10</div>
+                                        <div>Create Offer!</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>                       
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>View Offer!</div>
+                    <a href="#">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-tasks fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">19</div>
+                                        <div>View Offer!</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>                       
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>My Offers!</div>
+                    <a href="#">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">124</div>
+                                        <div>My Offers!</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>                       
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>View Responses!</div>
+                    <a href="#">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-support fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">13</div>
+                                        <div>View Responses!</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>                      
-                    </div>
+                        </div>
+                    </a>
                 </div>
-            </div>           
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            View Offers
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Offer Title</th>
+                                        <th>Request Type</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Posted On</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd gradeX">
+                                        <td>2BHK in Aundh</td>
+                                        <td>Available for Rent</td>
+                                        <td>Accomodation</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">23 July 2017</td>
+                                    </tr>
+                                    <tr class="even gradeC">
+                                        <td>3BHK in Baner</td>
+                                        <td>Available for Rent</td>
+                                        <td>Accomodation</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">8th September 2017</td>
+                                    </tr>
+                                    <tr class="odd gradeA">
+                                        <td>1BHK in Pimple Saudagar</td>
+                                        <td>Available for Rent</td>
+                                        <td>Accomodation</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">11th March 2017</td>
+                                    </tr>
+                                    <tr class="even gradeA">
+                                        <td>2BHK in Bandra</td>
+                                        <td>Available for Rent</td>
+                                        <td>Accomodation</td>
+                                        <td class="center">Mumbai</td>
+                                        <td class="center">27 March 2017</td>
+                                    </tr>
+                                    <tr class="odd gradeA">
+                                        <td>3BHK in Koregaon Park</td>
+                                        <td>Available for Rent</td>
+                                        <td>Accomodation</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">14 Feburary 2017</td>
+                                    </tr>
+                                    <tr class="even gradeA">
+                                        <td>1 year used Washing Machine</td>
+                                        <td>Available for Sale</td>
+                                        <td>Household Electronics</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">5 Feburary 2017</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>30" Samsung LED</td>
+                                        <td>Available for Sale</td>
+                                        <td>Electronics</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">31 January 2017</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>20l Geyser</td>
+                                        <td>Available for Sale</td>
+                                        <td>Bathroom Equipment</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">23 Jnauary 2017</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>Play Station 4(7 months used)</td>
+                                        <td>Available for Sale</td>
+                                        <td>Gaming Console</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">5 January 2017</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>FZ-S 2014 Model(14000 kms)</td>
+                                        <td>Available for Rent</td>
+                                        <td>Automobiles</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">1 January 2017</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>Bose Headphones(3 months used)</td>
+                                        <td>Available for Sale</td>
+                                        <td>Headphones</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">25yh December 2016</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>iPhone 6S 64GB(1 year used)</td>
+                                        <td>Available for Sale</td>
+                                        <td>Cellphones</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">12 December 2016</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>Honda Brio 2013(23000 kms)</td>
+                                        <td>Available for Sale</td>
+                                        <td>Automobiles</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">1 December 2016</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>LG 450l Fridge</td>
+                                        <td>Available for Sale</td>
+                                        <td>Kitchen Essentials</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">26 November 2016</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>1BHK in Magarpatta City</td>
+                                        <td>Available for Rent</td>
+                                        <td>Accomodation</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">24 November 2016</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>2BHK in Andheri West</td>
+                                        <td>Available for Rent</td>
+                                        <td>Accomodation</td>
+                                        <td class="center">Mumbai</td>
+                                        <td class="center">16 November 2017</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>1 room PG</td>
+                                        <td>Request for Rent</td>
+                                        <td>Accomodation</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">8 November 2017</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>Alienware 15" 2015 Laptop (16GB RAM, 4GB Graphic Card, 1TB HDD, i7 6th Gen)</td>
+                                        <td>Available for Sale</td>
+                                        <td>Computer Systems</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">1 Novermber 2017</td>
+                                    </tr>
+                                    <tr class="gradeA">
+                                        <td>Wooden Dressing Table</td>
+                                        <td>Available for Sale</td>
+                                        <td>Room Furniture</td>
+                                        <td class="center">Pune</td>
+                                        <td class="center">30 October 2016</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /#page-wrapper -->
         </div>
-        <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
@@ -223,12 +397,18 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
     <script src="~/Scripts/metisMenu.min.js"></script>
-    <!-- Morris Charts JavaScript -->
-    <script src="~/Scripts/raphael.min.js"></script>
-    <script src="~/Scripts/morris.min.js"></script>
-    <script src="~/Scripts/morris-data.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="~/Scripts/sb-admin-2.js"></script>
+    <!-- DataTables JavaScript -->
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/dataTables.responsive.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+    </script>
 </body>
 </html>
-

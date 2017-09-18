@@ -13,5 +13,10 @@ namespace XpnMarketPlace.Controllers
         {
             return View();
         }
+
+        public ActionResult CreateOffer()
+        {
+            return View();
+        }
     }
 }

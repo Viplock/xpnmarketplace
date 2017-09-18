@@ -365,6 +365,7 @@
     <Content Include="Scripts\_references.js" />
     <None Include="Views\Dashboard\blank.cshtml" />
     <None Include="Views\Dashboard\buttons.cshtml" />
+    <Content Include="Views\Dashboard\CreateOffer.cshtml" />
     <None Include="Views\Dashboard\flot.cshtml" />
     <None Include="Views\Dashboard\forms.cshtml" />
     <None Include="Views\Dashboard\grid.cshtml" />
